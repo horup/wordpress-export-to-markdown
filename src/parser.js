@@ -32,6 +32,8 @@ function getItemsOfType(data, type) {
 	return data.rss.channel[0].item.filter(item => item.post_type[0] === type);
 }
 
+const getTags = post => post.category.filter(c => c['$'].domain === 'post_tag').map(c => c['_'])
+
 function collectPosts(data, config) {
 	// this is passed into getPostContent() for the markdown conversion
 	const turndownService = translator.initTurndownService();
@@ -48,7 +50,8 @@ function collectPosts(data, config) {
 			},
 			frontmatter: {
 				title: getPostTitle(post),
-				date: getPostDate(post)
+				date: getPostDate(post),
+				tags: getTags(post)
 			},
 			content: translator.getPostContent(post, turndownService, config)
 		}));
