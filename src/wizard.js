@@ -54,7 +54,7 @@ const options = [
 		aliases: ['prefixdate'],
 		type: 'boolean',
 		description: 'Prefix post folders/files with date',
-		default: false
+		default: true
 	},
 	{
 		name: 'save-attached-images',
@@ -91,13 +91,13 @@ async function getConfig(argv) {
 			filter: option.coerce,
 			validate: option.validate
 		}));
-		answers = await inquirer.prompt(questions);
+		//answers = await inquirer.prompt(questions);
 	} else {
 		console.log('\nSkipping wizard...');
 		answers = {};
 	}
 
-	const config = { ...program.opts(), ...answers };
+	const config = { ...program.opts()};
 	return config;
 }
 

@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const YAML = require('yaml')
 const fs = require('fs');
 const luxon = require('luxon');
 const path = require('path');
@@ -55,14 +56,18 @@ async function writeMarkdownFilesPromise(posts, config ) {
 }
 
 async function loadMarkdownFilePromise(post) {
-	let output = '---\n';
+	/*let output = '---\n';
 	Object.entries(post.frontmatter).forEach(pair => {
 		const key = pair[0];
 		const value = (pair[1] || '').replace(/"/g, '\\"');
 		output += key + ': "' + value + '"\n';
 	});
 	output += '---\n\n' + post.content + '\n';
-	return output;
+	return output;*/
+	let output = '---\n'
+	output += YAML.stringify(post.frontmatter)
+	output += '---\n\n' + post.content + '\n'
+	return output
 }
 
 async function writeImageFilesPromise(posts, config) {
