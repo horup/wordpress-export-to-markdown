@@ -134,6 +134,8 @@ function getPostPath(post, config) {
 		slugFragment = dt.toFormat('yyyy-LL-dd') + '-' + slugFragment;
 	}
 
+	console.log(`/${dt.toFormat('yyyy/LL/dd')}/${post.meta.slug} /${slugFragment}/`)
+
 	// use slug fragment as folder or filename as specified
 	if (config.postFolders) {
 		pathSegments.push(slugFragment, 'index.md');
