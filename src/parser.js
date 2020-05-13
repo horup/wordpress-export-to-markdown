@@ -112,11 +112,12 @@ function collectScrapedImages(data) {
 		const postContent = post.encoded[0];
 		const postLink = post.link[0];
 
+		//const matches = [...postContent.matchAll(/<img[^>]*src="([^"]+)"[^>]*>/gi)];
 		const matches = [...postContent.matchAll(/<img[^>]*src="(.+?\.(?:gif|jpe?g|png))"[^>]*>/gi)];
 		matches.forEach(match => {
 			// base the matched image URL relative to the post URL
 			const url = new URL(match[1], postLink).href;
-
+			console.log(url);
 			images.push({
 				id: -1,
 				postId: postId,
